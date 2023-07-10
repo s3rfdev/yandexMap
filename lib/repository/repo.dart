@@ -10,4 +10,9 @@ class Repo {
     int res = await YandexTile.checkImageUrl(path);
     return res;
   }
+
+  static List<double> getXY(lat, long, z) {
+    var res = YandexTile.fromGeoToPixels(lat, long, z);
+    return res;
+  }
 }

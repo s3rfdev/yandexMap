@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview/bloc/image_bloc.dart';
+import '../repository/repo.dart';
 import '../res/utils.dart';
 
 class MainScreen extends StatefulWidget {
@@ -74,6 +75,10 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              Text(Repo.getXY(double.parse(_lat.text), double.parse(_long.text),
+                      int.parse(_z.text))
+                  .toString()),
               const SizedBox(height: 20),
               !_isError
                   ? _isLoading
