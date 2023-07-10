@@ -11,8 +11,8 @@ class Repo {
     return res;
   }
 
-  static List<double> getXY(lat, long, z) {
-    var res = YandexTile.fromGeoToPixels(lat, long, z);
-    return res;
+  static List<int> getXY(lat, long, z) {
+    var [x, y] = YandexTile.fromGeoToPixels(lat, long, z);
+    return YandexTile.fromPixelsToTileNumber(x, y);
   }
 }

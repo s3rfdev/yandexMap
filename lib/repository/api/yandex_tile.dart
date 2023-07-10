@@ -17,14 +17,14 @@ class YandexTile {
     return [xP, yP];
   }
 
-  static String getTilesUrl(lat, long, z) {
-    List<int> fromPixelsToTileNumber(x, y) {
-      return [
-        (x / 256).floor(),
-        (y / 256).floor(),
-      ];
-    }
+  static List<int> fromPixelsToTileNumber(x, y) {
+    return [
+      (x / 256).floor(),
+      (y / 256).floor(),
+    ];
+  }
 
+  static String getTilesUrl(lat, long, z) {
     var pixelCoords = fromGeoToPixels(lat, long, z);
     var [x, y] = fromPixelsToTileNumber(pixelCoords[0], pixelCoords[1]);
 
