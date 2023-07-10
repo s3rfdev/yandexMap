@@ -30,9 +30,7 @@ class _MainScreenState extends State<MainScreen> {
         },
         error: (msg) {
           _isError = true;
-          setState(() {
-            _msg = msg;
-          });
+          _msg = msg;
         });
     return Scaffold(
       appBar: AppBar(
@@ -62,10 +60,9 @@ class _MainScreenState extends State<MainScreen> {
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              _msg = '';
-                              _isError = false;
-                            });
+                            _msg = '';
+                            _isError = false;
+
                             context.read<ImageBloc>().add(ImageEvent.fetch(
                                 double.parse(_lat.text),
                                 double.parse(_long.text),
