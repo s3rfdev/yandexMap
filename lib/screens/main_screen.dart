@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   bool _isError = true;
   Image? _image;
   String _msg = '';
+
   @override
   Widget build(BuildContext context) {
     context.watch<ImageBloc>().state.when(
