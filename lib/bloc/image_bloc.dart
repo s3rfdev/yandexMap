@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../repository/repo.dart';
-
 part 'image_event.dart';
 part 'image_state.dart';
 part 'image_bloc.freezed.dart';
@@ -12,13 +11,11 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
   ImageBloc({required Repo repo}) : super(ImageState.loading()) {
     on<ImageEventFetch>(
       (event, emit) async {
-        print('Fetch');
         emit(const ImageState.loading());
 
         String path = Repo().getImageUrl(event.lat, event.long, event.z);
-
         int res = await Repo().checkImageUrl(path);
-        print(res);
+
         if (res == 200) {
           //плтитка найдена
           Image image = Image.network(path);
