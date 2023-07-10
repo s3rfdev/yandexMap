@@ -1,11 +1,14 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
 
+const url =
+    'https://core-carparks-renderer-lots.maps.yandex.net/maps-rdr-carparks/tiles?l=carparks';
+
 class YandexTile {
   static String getTilesUrl(lat, long, z) {
-    fromGeoToPixels(lat, long, z) {
-      var x_p,
-          y_p,
+    List<double> fromGeoToPixels(lat, long, z) {
+      double xP,
+          yP,
           rho,
           pi = 3.1415926535897932,
           beta,
@@ -17,10 +20,10 @@ class YandexTile {
       phi = (1 - e * sin(beta)) / (1 + e * sin(beta));
       theta = tan(pi / 4 + beta / 2) * pow(phi, e / 2);
 
-      x_p = rho * (1 + long / 180);
-      y_p = rho * (1 - log(theta) / pi);
+      xP = rho * (1 + long / 180);
+      yP = rho * (1 - log(theta) / pi);
 
-      return [x_p, y_p];
+      return [xP, yP];
     }
 
     List<int> fromPixelsToTileNumber(x, y) {
@@ -31,9 +34,8 @@ class YandexTile {
     }
 
     var pixelCoords = fromGeoToPixels(lat, long, z);
-    var [x, y] =
-        fromPixelsToTileNumber(pixelCoords[0], pixelCoords[1]) as List<int>;
-    return 'https://core-carparks-renderer-lots.maps.yandex.net/maps-rdr-carparks/tiles?l=carparks&x=$x&y=$y&z=$z';
+    var [x, y] = fromPixelsToTileNumber(pixelCoords[0], pixelCoords[1]);
+    return '$url&x=$x&y=$y&z=$z';
   }
 
   static Future<int> checkImageUrl(String path) async {
